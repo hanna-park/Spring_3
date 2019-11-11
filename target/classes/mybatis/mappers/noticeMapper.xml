@@ -4,13 +4,19 @@
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
   
 <mapper namespace="noticeMapper">
+	<select id = "noticeCount" resultType="java.lang.Integer">
+		select count(*) from notice
+	</select>
 	
 	<update id= "noticeUpdate" parameterType="com.qq.s3.model.board.NoticeVO">
 		update notice set title=#{title}, contents =#{contents} where num = #{num}
 	</update>
 	
-	<select id= "noticeList" resultType ="com.qq.s3.model.board.NoticeVO">
-		select * from notice order by num desc
+	<select id= "noticeList" parameterType="java.util.Map" resultType ="com.qq.s3.model.board.NoticeVO">
+		select * from 
+		(select N.*, rownum R from
+		(select * from notice order by num desc) N)
+		where R between #{startRow} and #{rastRow}
 	</select>
 	
 	<select id = "noticeSelect" resultType="com.qq.s3.model.board.NoticeVO" parameterType="java.util.Map">

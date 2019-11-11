@@ -37,6 +37,16 @@
 	</table>
 	
 	<a href = "./noticeWrite">Write</a>
+	
+	<div>
+		<ul class="pagination">
+		<c:forEach begin ="1" end="${totalPage}" var = "i">
+			  <li><a href="./noticeList?curPage=${i}">${i}</a></li>
+		</c:forEach>
+		</ul>
+	
+	</div>
+	
 	</div>
 </body>
 </html>
