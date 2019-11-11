@@ -16,7 +16,7 @@
 		select * from 
 		(select N.*, rownum R from
 		(select * from notice order by num desc) N)
-		where R between #{startRow} and #{rastRow}
+		where R between #{startRow} and #{lastRow}
 	</select>
 	
 	<select id = "noticeSelect" resultType="com.qq.s3.model.board.NoticeVO" parameterType="java.util.Map">
