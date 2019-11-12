@@ -1,5 +1,15 @@
+
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+
+<%-- <%@page import="com.qq.member.MemberDTO"%> --%>
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
+<%
+	//MemberDTO memberDTO = (MemberDTO)session.getAttribute("member");
+
+%>
+
 
 <nav class="navbar navbar-inverse">
   <div class="container-fluid">
@@ -28,4 +38,6 @@
     </ul>
   </div>
   
+
 </nav>
+
