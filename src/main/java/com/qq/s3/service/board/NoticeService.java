@@ -24,11 +24,10 @@ public class NoticeService {
 	}
 	
 	public List<NoticeVO> noticeList(Pager pager) throws Exception{
-		RowMaker rowMaker = pager.makeRow();
-		pager.makePager(noticeDAO.noticeCount());
-		
-		
-		return noticeDAO.noticeList(rowMaker);
+		pager.makeRow();
+		pager.makePager(noticeDAO.noticeCount(pager));
+	
+		return noticeDAO.noticeList(pager);
 		
 	}
 	

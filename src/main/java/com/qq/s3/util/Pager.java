@@ -7,6 +7,54 @@ public class Pager {
 	private Integer lastNum;
 	private Integer curBlock;
 	private Integer totalBlock;
+	private String search;
+	private String kind;
+	
+	public Integer getStartRow() {
+		return startRow;
+	}
+
+	public void setStartRow(Integer startRow) {
+		this.startRow = startRow;
+	}
+
+	public Integer getLastRow() {
+		return lastRow;
+	}
+
+	public void setLastRow(Integer lastRow) {
+		this.lastRow = lastRow;
+	}
+
+
+	private Integer startRow;
+	private Integer lastRow;
+	
+
+	
+	
+	public String getSearch() {
+		if(search ==null) {
+			search="";
+		}
+		
+		return search;
+	}
+
+	public void setSearch(String search) {
+		this.search = search;
+	}
+
+	public String getKind() {
+		return kind;
+	}
+
+	public void setKind(String kind) {
+		this.kind = kind;
+	}
+
+	
+	
 	
 	public Integer getTotalBlock() {
 		return totalBlock;
@@ -25,12 +73,38 @@ public class Pager {
 	}
 
 	public Pager() {
+		if(perPage ==null || perPage ==0)
 		perPage=10;
 		
 	}
+	
+
+	public Integer getPerPage() {
+		return perPage;
+	}
+
+	public void setPerPage(Integer perPage) {
+		this.perPage = perPage;
+	}
+
+	public void setStartNum(Integer startNum) {
+		this.startNum = startNum;
+	}
+
+	public void setLastNum(Integer lastNum) {
+		this.lastNum = lastNum;
+	}
+
+	public void setCurBlock(Integer curBlock) {
+		this.curBlock = curBlock;
+	}
+
+	public void setTotalBlock(Integer totalBlock) {
+		this.totalBlock = totalBlock;
+	}
 
 	public Integer getCurPage() {
-		if(this.curPage == null) {
+		if(this.curPage == null || this.curPage==0) {
 			this.curPage =1;
 		}
 		return curPage;
@@ -65,7 +139,7 @@ public class Pager {
 		
 		//5. curBlock으로 startNum, lastNum 구하기
 		startNum = (curBlock-1)*perBlock+1;
-		lastNum= curBlock*perBlock;
+		lastNum= curBlock*5;
 		
 		if(curBlock == totalBlock) {
 			lastNum = totalPage;
@@ -75,14 +149,11 @@ public class Pager {
 	}
 	
 	
-	public RowMaker makeRow() {
+	public void makeRow() {
 		//rownum 계산
-		int startRow = (this.getCurPage()-1)*perPage+1;
-		int lastRow = this.getCurPage()*perPage;
-		RowMaker rowMaker = new RowMaker();
-		rowMaker.setStartRow(startRow);
-		rowMaker.setLastRow(lastRow);
-		return rowMaker;
+		this.startRow = (this.getCurPage()-1)*this.getPerPage()+1;
+		this.lastRow = this.getCurPage()*this.getPerPage();
+
 	}
 	
 	

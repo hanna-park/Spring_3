@@ -13,7 +13,20 @@
 <c:import url="../layout/nav.jsp" />
 	<div class= "container">
 	<h1>Notice List Page</h1>
+	
+	<form action="./noticeList">
+		<input type="hidden" value = "1" name ="curPage" id="curPage">
+		<select name ="kind">
+			<option id ="kt" value ="kt">title</option>
+			<option id ="kw" value ="kw">writer</option>
+			<option id ="kc" value ="kc">contents</option>
+		</select>
+		<input type="text" name ="search" value = "${rowMaker.search}">
+		<button>검색</button>
+	</form>
+	
 	<table class="table">
+	
 	<thead>
 	<tr>
 		<td>num</td>
@@ -41,19 +54,32 @@
 	<div>
 		<ul class="pagination">
 		<c:if test="${pager.curBlock gt 1}">
-			<li><a href="./noticeList?curPage=${pager.startNum-1}">이전</a></li>
+			<li><a href="./noticeList?curPage=${pager.startNum-1}" class="list">이전</a></li>
 		</c:if>
-		<c:forEach begin ="${pager.startNum}" end="${pager.lastNum}" var = "i">
-			  <li><a href="./noticeList?curPage=${i}">${i}</a></li>
+		<c:forEach begin ="${rowMaker.startNum}" end="${pager.lastNum}" var = "i" >
+			<li><a href="./noticeList?curPage=${i}" class="list">${i}</a></li>
 		</c:forEach>
 		<c:if test="${pager.curBlock lt pager.totalBlock }">
-		<li><a href="./noticeList?curPage=${pager.lastNum+1}">다음</a></li>
-		</c:if>
+			<li><a href="./noticeList?curPage=${pager.lastNum+1}" class="list">다음</a></li>
+		</c:if>		
 		</ul>
+	
+	</div>
+	
+	</div>
+	<script type="text/javascript">
+		if(${pager.kind}==''){
+			kind='kt'
+		}
+	
+		$("#${pager.kind}")prop("selected",true);
+		$(".list").click(function(){
+			$("#curPage").val($(this).attr("id"));
+			$("#frm").submit();
+			
+		});
 		
-	
-	</div>
-	
-	</div>
+	</script>
+
 </body>
 </html>

@@ -10,6 +10,7 @@ import org.apache.ibatis.session.SqlSession;
 import org.springframework.stereotype.Repository;
 
 import com.qq.s3.model.board.NoticeVO;
+import com.qq.s3.util.Pager;
 import com.qq.s3.util.RowMaker;
 
 @Repository
@@ -20,9 +21,9 @@ public class NoticeDAO {
 	private static final String NAMESPACE = "noticeMapper.";	//final : 변경되지 않고 상수로 씀
 	
 	
-	public int noticeCount() throws Exception{
+	public int noticeCount(Pager pager) throws Exception{
 		
-		return sqlSession.selectOne(NAMESPACE+"noticeCount");
+		return sqlSession.selectOne(NAMESPACE+"noticeCount",pager);
 	}
 	
 	public int noticeUpdate(NoticeVO noticeVO) throws Exception{
@@ -31,8 +32,8 @@ public class NoticeDAO {
 	}
 	
 	
-	public List<NoticeVO> noticeList(RowMaker rowMaker) throws Exception{
-		return sqlSession.selectList(NAMESPACE+"noticeList",rowMaker);
+	public List<NoticeVO> noticeList(Pager pager) throws Exception{
+		return sqlSession.selectList(NAMESPACE+"noticeList",pager);
 	}
 	
 	

@@ -4,18 +4,41 @@
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
   
 <mapper namespace="noticeMapper">
-	<select id = "noticeCount" resultType="java.lang.Integer">
-		select count(*) from notice
+	<select id = "noticeCount" parameterType="com.qq.s3.util.Pager" resultType="java.lang.Integer" >
+		select count(nvl(num,0)) from notice
+		<choose>
+			<when test="kind == 'kt'">
+				where title like '%'||#{search}||'%'
+			</when>
+			<when test="kind == 'kw'">
+				where writer like '%'||#{search}||'%' 
+			</when>
+			<otherwise>
+				where contents like '%'||#{search}||'%' 
+			</otherwise>
+		</choose>
 	</select>
 	
 	<update id= "noticeUpdate" parameterType="com.qq.s3.model.board.NoticeVO">
 		update notice set title=#{title}, contents =#{contents} where num = #{num}
 	</update>
 	
-	<select id= "noticeList" parameterType="java.util.Map" resultType ="com.qq.s3.model.board.NoticeVO">
+	<select id= "noticeList"  parameterType="com.qq.s3.util.Pager" resultType ="com.qq.s3.model.board.NoticeVO">
 		select * from 
 		(select N.*, rownum R from
-		(select * from notice order by num desc) N)
+		(select * from notice  
+		<choose>
+			<when test="kind == 'kt'">
+				where title like '%'||#{search}||'%'
+			</when>
+			<when test="kind == 'kw'">
+				where writer like '%'||#{search}||'%' 
+			</when>
+			<otherwise>
+				where contents like '%'||#{search}||'%' 
+			</otherwise>
+		</choose>
+		order by num desc) N)
 		where R between #{startRow} and #{lastRow}
 	</select>
 	
