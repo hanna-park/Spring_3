@@ -19,7 +19,8 @@ public class QnaService {
 	public List<QnaVO> qnaList(Pager pager) throws Exception{
 		//DB rownum 계산
 		pager.makeRow();
-		pager.makePage(qnaDAO.qnaCount(pager));
+		pager.makePager(qnaDAO.qnaCount(pager));
+	
 		return qnaDAO.qnaList(pager);
 	}
 	

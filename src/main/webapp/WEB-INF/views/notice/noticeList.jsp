@@ -7,6 +7,7 @@
 <c:import url="../layout/bootStrap.jsp"/>
 <meta charset="UTF-8">
 <title>Insert title here</title>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
 </head>
 <body>
 
@@ -51,28 +52,27 @@
 	
 	<a href = "./noticeWrite">Write</a>
 	
-	<div>
-		<ul class="pagination">
+
+		
 		<c:if test="${pager.curBlock gt 1}">
-			<li><a href="./noticeList?curPage=${pager.startNum-1}" class="list">이전</a></li>
+			<span id="${pager.startNum-1}" class="list">이전</span>
 		</c:if>
 		<c:forEach begin ="${rowMaker.startNum}" end="${pager.lastNum}" var = "i" >
-			<li><a href="./noticeList?curPage=${i}" class="list">${i}</a></li>
+			<span id= "${i}" class="list">${i}</span>
 		</c:forEach>
 		<c:if test="${pager.curBlock lt pager.totalBlock }">
-			<li><a href="./noticeList?curPage=${pager.lastNum+1}" class="list">다음</a></li>
+			<span id="${pager.lastNum+1}" class="list">다음</span>
 		</c:if>		
-		</ul>
-	
-	</div>
+
 	
 	</div>
 	<script type="text/javascript">
-		if(${pager.kind}==''){
-			kind='kt'
+		var kind ='${pager.kind}'
+		if(kind==''){
+			kind='kt';
 		}
 	
-		$("#${pager.kind}")prop("selected",true);
+		$("#"+kind)prop("selected",true);
 		$(".list").click(function(){
 			$("#curPage").val($(this).attr("id"));
 			$("#frm").submit();

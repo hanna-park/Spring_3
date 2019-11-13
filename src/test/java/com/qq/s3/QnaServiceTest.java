@@ -12,6 +12,7 @@ import com.qq.s3.model.board.QnaVO;
 import com.qq.s3.service.board.QnaService;
 import com.qq.s3.util.Pager;
 
+
 public class QnaServiceTest extends TestAbstractCase{
 	
 	@Inject
@@ -21,7 +22,7 @@ public class QnaServiceTest extends TestAbstractCase{
 	public void qnaListTest() throws Exception {
 		Pager pager = new Pager();
 		List<QnaVO> ar = qnaService.qnaList(pager);
-		pager.makePage(50);
+		//pager.makePage(50);
 		assertNotEquals(0, ar.size());
 		assertEquals(10, (int)pager.getLastRow());
 		
