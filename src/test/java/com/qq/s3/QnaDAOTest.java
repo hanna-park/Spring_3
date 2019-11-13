@@ -38,7 +38,7 @@ public class QnaDAOTest extends TestAbstractCase {
 			qnaVO.setTitle("qt"+i);
 			qnaVO.setContents("qc"+i);
 			
-			int result = qnaDAO.qnaInsert(qnaVO);
+			//int result = qnaDAO.qnaInsert(qnaVO);
 		}
 		
 	}
